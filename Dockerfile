@@ -1,5 +1,4 @@
-
-FROM php:fpm-alpine
+FROM php:7.2-fpm-alpine
 WORKDIR /var/www/html
 COPY / /var/www/html/
 RUN apk add --no-cache nginx \
