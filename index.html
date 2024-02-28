@@ -211,21 +211,6 @@
         <li>镜像维护&nbsp;<a href="https://blog.17lai.site" target="_blank" style="color: #72ACE3">夜法之书</a>，禁止违法使用，后果自负，邮件联系，有事请留言。</li>
     </ul>
 </script>
-<script>
-    // 给按钮绑定点击事件，点击后隐藏公告并设置本地存储标记
-    $('.layui-layer-btn0').on('click', function() {
-        $('#layer-placard-box').hide(); // 隐藏公告
-        localStorage.setItem('hasClicked', true); // 设置点击标记
-    });
-
-    // 检查本地存储中是否有标记
-    var hasClicked = localStorage.getItem('hasClicked');
-    
-    // 如果没有点击过，则显示公告
-    if (!hasClicked) {
-        $('#layer-placard-box').show(); // 显示公告
-    }
-</script>
 
 </body>
 
