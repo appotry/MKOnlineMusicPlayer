@@ -12,9 +12,12 @@ RUN apk add --no-cache nginx \
 EXPOSE 264
 # Persistent config file and cache
 VOLUME [ "/var/www/html/cache" ]
+VOLUME [ "/var/www/html/temp" ]
 
 # 复制 entrypoint.sh 文件到镜像中
 COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /*.sh
 
 # 设置 entrypoint.sh 脚本作为入口点
 ENTRYPOINT ["/entrypoint.sh"]
