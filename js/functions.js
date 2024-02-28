@@ -631,20 +631,30 @@ function changeCover(music) {
     } else {
         if(mkPlayer.mcoverbg === true && rem.isMobile)      // 移动端封面
         {    
-            $("#music-cover").load(function(){
-                $("#mobile-blur").css('background-image', 'url("' + img + '")');
+            $("#music-cover").on('load', function(){
+                var img = $(this).attr('src'); // 获取图片路径
+                $("#mobile-blur").css('background-image', 'url("' + img + '")'); // 设置背景图像
+            }).on('error', function() {
+                // 图片加载失败的处理
+                console.log("图片加载失败！");
+                var defaultImg = 'images/player_cover.png';
+                $("#mobile-blur").css('background-image', 'url("' + defaultImg + '")'); // 设置默认背景图像
             });
         } 
         else if(mkPlayer.coverbg === true && !rem.isMobile)     // PC端封面
         { 
-            $("#music-cover").load(function(){
-                if(animate) {   // 渐变动画也已完成
-                    $("#blur-img").backgroundBlur(img);    // 替换图像并淡出
-                    $("#blur-img").animate({opacity:"1"}, 2000); // 背景更换特效
+            $("#music-cover").on('load', function(){
+                var imgSrc = $(this).attr('src'); // 获取图片路径
+                if (animate) { // 如果动画已经完成
+                    $("#blur-img").backgroundBlur(imgSrc); // 使用图片路径替换图像并淡出
+                    $("#blur-img").animate({ opacity: "1" }, 2000); // 背景更换特效
                 } else {
-                    imgload = true;     // 告诉下面的函数，图片已准备好
+                    imgload = true; // 告诉下面的函数，图片已准备好
                 }
-                
+            }).on('error', function() {
+                // 图片加载失败的处理
+                console.log("图片加载失败！");
+                $(this).attr('src', 'images/player_cover.png'); // 将图片路径设置为默认图片路径
             });
             
             // 渐变动画
