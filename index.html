@@ -211,6 +211,22 @@
         <li>镜像维护&nbsp;<a href="https://blog.17lai.site" target="_blank" style="color: #72ACE3">夜法之书</a>，禁止违法使用，后果自负，邮件联系，有事请留言。</li>
     </ul>
 </script>
+<script>
+    // 检查本地存储中是否有标记
+    var hasClicked = localStorage.getItem('hasClicked');
+    
+    // 如果没有点击过，则显示公告
+    if (!hasClicked) {
+        var layerPlacardBox = document.getElementById('layer-placard-box');
+        layerPlacardBox.style.display = 'block';
+    
+        // 给公告绑定点击事件，点击后隐藏并设置本地存储标记
+        layerPlacardBox.addEventListener('click', function() {
+            layerPlacardBox.style.display = 'none';
+            localStorage.setItem('hasClicked', true);
+        });
+    }
+</script>
 
 </body>
 
