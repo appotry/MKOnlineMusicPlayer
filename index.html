@@ -212,9 +212,9 @@
     </ul>
 </script>
 <script>
-    // 给公告绑定点击事件，点击后隐藏并设置本地存储标记
-    document.getElementById('layer-placard-box').addEventListener('click', function() {
-        this.style.display = 'none'; // 隐藏公告
+    // 给按钮绑定点击事件，点击后隐藏公告并设置本地存储标记
+    $('.layui-layer-btn0').on('click', function() {
+        $('#layer-placard-box').hide(); // 隐藏公告
         localStorage.setItem('hasClicked', true); // 设置点击标记
     });
 
@@ -223,7 +223,7 @@
     
     // 如果没有点击过，则显示公告
     if (!hasClicked) {
-        document.getElementById('layer-placard-box').style.display = 'block';
+        $('#layer-placard-box').show(); // 显示公告
     }
 </script>
 
