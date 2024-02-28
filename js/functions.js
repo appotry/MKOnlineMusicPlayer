@@ -303,7 +303,7 @@ $(function(){
     }
     
     // 图片加载失败处理
-    $('img').error(function(){
+    $('img').on('error', function(){
         $(this).attr('src', 'images/player_cover.png');
     });
     
