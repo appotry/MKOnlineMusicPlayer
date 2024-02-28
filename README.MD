@@ -8,7 +8,7 @@ MxuePlay是MKOnlineMusicPlayer的优化版，MKOnlineMusicPlayer 是一款开源
 
 
 ```
-docker run -d --name music -p 264:264 -v <本机缓存目录>:/var/www/html/cache appotry/music-player-docker
+docker run -d --name music -p 264:264 -v <本机缓存目录>:/var/www/html/cache bloodstar/music-player
 ```
 
 ### 界面欣赏
