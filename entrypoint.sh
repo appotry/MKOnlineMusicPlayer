@@ -7,6 +7,12 @@ mkdir -p -m 755 /var/www/html/temp/netease
 mkdir -p -m 755 /var/www/html/temp/tencent
 mkdir -p -m 755 /var/www/html/temp/xiami
 
+chown -R www-data:www-data /var/www/html/temp/baidu
+chown -R www-data:www-data /var/www/html/temp/kugou
+chown -R www-data:www-data /var/www/html/temp/netease
+chown -R www-data:www-data /var/www/html/temp/tencent
+chown -R www-data:www-data /var/www/html/temp/xiami
+
 # 添加执行权限给所有的 `.sh` 文件
 chmod +x /*.sh
 
