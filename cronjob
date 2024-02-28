@@ -1,0 +1,8 @@
+# 每分钟删除超过1分钟的 .json 文件，并将日志记录到指定位置
+* * * * * find /var/www/html/cache/*.json -type f -cmin +1 -exec rm -fv {} \; >> /var/www/html/temp/cron.log 2>&1
+
+# 每10分钟删除超过10分钟的 .mp3 文件，并将日志记录到指定位置
+*/10 * * * * find /var/www/html/temp/*.mp3 -type f -cmin +10 -exec rm -fv {} \; >> /var/www/html/temp/cron.log 2>&1
+
+# 每小时检查并清空超过2M的 .log 文件，并将日志记录到指定位置
+0 * * * * find /var/www/html/temp/*.log -type f -size +2M -exec truncate -s 0 {} + >> /var/www/html/temp/cron.log 2>&1
