@@ -1,3 +1,3 @@
-* * * * * find /var/www/html/cache/*.json -type f -cmin +1 -exec rm -fv {} \;
-* * * * * find /var/www/html/temp/*.mp3 -type f -cmin +10 -exec rm -fv {} \;
-0 * * * * find /var/www/html/temp/*.log -type f -size +2M -exec truncate -s 0 {} +
+* * * * * find /var/www/html/cache/*.json -type f -cmin +1 -exec rm -fv {} \; >> /var/www/html/temp/cron.log 2>&1
+* * * * * find /var/www/html/temp/*.mp3 -type f -cmin +10 -exec rm -fv {} \; >> /var/www/html/temp/cron.log 2>&1
+0 * * * * find /var/www/html/temp/*.log -type f -size +2M -exec truncate -s 0 {} + >> /var/www/html/temp/cron.log 2>&1
