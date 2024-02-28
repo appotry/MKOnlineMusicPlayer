@@ -5,4 +5,4 @@
 */10 * * * * find /var/www/html/temp/ -name "*.mp3" -type f -mmin +10 -exec rm -fv {} \; >> /var/www/html/temp/cron.log 2>&1
 
 # 每小时检查并清空超过2M的 .log 文件，并将日志记录到指定位置
-0 * * * * find /var/www/html/temp/ -name "*.log" -type f -size +2M -exec truncate -s 0 {} + >> /var/www/html/temp/cron.log 2>&1
+0 * * * * find /var/www/html/temp/ -name "*.log" -type f -exec stat -c %s {} \; | while read size; do if [ "$size" -gt 2097152 ]; then truncate -s 0 {} >> /var/www/html/temp/cron.log 2>&1; fi; done
