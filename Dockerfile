@@ -1,24 +1,27 @@
-FROM php:7.2-fpm-alpine
-WORKDIR /var/www/html
-COPY / /var/www/html/
-# 安装 nginx 和 cron
-RUN apk add --no-cache nginx \
-    && apk add --no-cache dcron \
-    && mkdir /run/nginx \
-    && chown -R www-data:www-data cache/ \
-    && mv default.conf /etc/nginx/conf.d \
-    && mv php.ini /usr/local/etc/php
+#!/bin/sh
 
-EXPOSE 264
-# Persistent config file and cache
-VOLUME [ "/var/www/html/cache" ]
+# 检查并创建目录，设置权限
+mkdir -p -m 755 /var/www/html/temp/baidu
+mkdir -p -m 755 /var/www/html/temp/kugou
+mkdir -p -m 755 /var/www/html/temp/netease
+mkdir -p -m 755 /var/www/html/temp/tencent
+mkdir -p -m 755 /var/www/html/temp/xiami
 
-# 复制 entrypoint.sh 文件到镜像中
-COPY entrypoint.sh /entrypoint.sh
+chown -R www-data:www-data /var/www/html/temp/baidu
+chown -R www-data:www-data /var/www/html/temp/kugou
+chown -R www-data:www-data /var/www/html/temp/netease
+chown -R www-data:www-data /var/www/html/temp/tencent
+chown -R www-data:www-data /var/www/html/temp/xiami
 
-RUN chmod +x /*.sh
+# 添加执行权限给所有的 `.sh` 文件
+chmod +x /*.sh
 
-# 设置 entrypoint.sh 脚本作为入口点
-ENTRYPOINT ["/entrypoint.sh"]
+# 复制 cron 任务配置文件到 /etc/crontabs/root
+cp /var/www/html/cronjob /etc/crontabs/root
 
+# 启动 cron 服务，并将日志重定位到指定位置
+crond -l 2 
+
+# 启动 PHP-FPM 和 Nginx
+php-fpm & nginx -g "daemon off;"
 
