@@ -22,6 +22,16 @@ cp /var/www/html/cronjob /etc/crontabs/root
 # 启动 cron 服务，并将日志重定位到指定位置
 crond -l 2 
 
+if [ ! -f /var/www/html/userRun.sh ]; then 
+    echo "cp userRun.sh"
+    cp /userRun.sh /var/www/html/userRun.sh; 
+    chmod +x /var/www/html/userRun.sh;
+    /var/www/html/userRun.sh; 
+else 
+    echo "run userRun.sh"
+    /var/www/html/userRun.sh; 
+fi
+
 # 启动 PHP-FPM 和 Nginx
 php-fpm & nginx -g "daemon off;"
 
