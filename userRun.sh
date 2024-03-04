@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "add User CMD here!"
 
