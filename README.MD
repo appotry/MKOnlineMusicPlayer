@@ -18,7 +18,7 @@ userRun.sh 例子
 html_file="/var/www/html/index.html"
 js_code='<script defer src="https://xxx.site/script.js" data-website-id="xxx-xxx-xxx-xxx-xxx"></script>'
 
-if grep -q "ana.17lai.site/script.js" "$html_file"; then
+if grep -q "https://xxx.site/script.js" "$html_file"; then
     echo "JS code already exists in $html_file"
 else
     if grep -q "</body>" "$html_file"; then
