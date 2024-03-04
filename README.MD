@@ -11,6 +11,27 @@ MxuePlay是MKOnlineMusicPlayer的优化版，MKOnlineMusicPlayer 是一款开源
 docker run -d --name music -p 264:264 -v <本机缓存目录>:/var/www/html/cache bloodstar/music-player
 ```
 
+userRun.sh 例子
+```bash
+#!/bin/bash
+
+html_file="/var/www/html/index.html"
+js_code='<script defer src="https://xxx.site/script.js" data-website-id="xxx-xxx-xxx-xxx-xxx"></script>'
+
+if grep -q "ana.17lai.site/script.js" "$html_file"; then
+    echo "JS code already exists in $html_file"
+else
+    if grep -q "</body>" "$html_file"; then
+        sed -i "s|</body>|$js_code\n</body>|" "$html_file"
+        echo "JS code added to $html_file"
+    else
+        echo "Error: </body> tag not found in $html_file"
+        exit 1
+    fi
+fi
+
+```
+
 ### 界面欣赏
 -----
 ![主界面(电脑端)](https://user-images.githubusercontent.com/35069089/52914931-e9655d00-3308-11e9-8347-a1f9be614e10.png)
